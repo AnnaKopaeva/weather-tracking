@@ -1,0 +1,28 @@
+.country_value {
+  width: 300px;
+  height: 30px;
+  padding: 0;
+  outline: none;
+  box-sizing: border-box;
+  text-indent: 15px; }
+
+.button {
+  height: 30px;
+  outline: none; }
+
+.autocomplete {
+  margin: 0;
+  padding: 0;
+  width: 300px;
+  box-sizing: border-box;
+  border: 2px solid aliceblue; }
+
+.hidden {
+  display: none; }
+
+.autocomplete_item {
+  list-style: none;
+  text-align: left;
+  width: 100%; }
+  .autocomplete_item:hover {
+    background-color: aliceblue; }
