@@ -1,0 +1,32 @@
+.wrapper_temperature {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  border: 3px solid #57b7df;
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-content: center;
+  justify-content: center; }
+
+.wrapper_icon {
+  display: inline-flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  align-items: center; }
+
+.forecast_time {
+  font-size: 24px;
+  font-weight: 600;
+  padding: 10px 0; }
+
+.forecast_temperature {
+  font-size: 28px;
+  font-weight: 600;
+  color: #57b7df; }
+
+.forecast_feels {
+  text-transform: uppercase;
+  text-align: center; }
+
+.forecast_feels_value {
+  color: #57b7df; }

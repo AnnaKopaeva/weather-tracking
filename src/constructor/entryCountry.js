@@ -11,7 +11,14 @@ import AutocompleteList from './autocompleteList'
 //style
 import '../css/App.css';
 
+//the constructor, where you can enter the city and the country,
+//we get the initial value automatically according to the coordinates of the user
 class EntryCountry extends Component {
+
+  componentWillMount(){
+    const {actions : { geoLookup }} = this.props;
+    geoLookup()
+  }
 
   changeInput = (e) => {
     const value = e.target.value;
@@ -20,6 +27,24 @@ class EntryCountry extends Component {
     //called actions, that returns an array of data that is obtained from an autocomplete
     getAutocompleteData(value);
   };
+
+
+  changeItemCountry = (country, key) => {
+    const { state: {data}, actions : {changeCountry, getAutocompleteData, fetchWeatherData, fetchForecastData} } = this.props;
+
+    changeCountry(country);
+
+    let result = data[key];
+    if (result) {
+
+      // localStorage["result"] = "this.props";
+      // localStorage["result"];
+      console.log(key)
+
+      fetchWeatherData(result.lat, result.lon);
+      fetchForecastData(result.lat, result.lon);
+    }
+  }
 
   addCountry = () => {
     const { state: { countryList }, actions: {addCountryList}} = this.props;
@@ -33,11 +58,17 @@ class EntryCountry extends Component {
     deleteCountryList(countryList, key)
   }
 
+
   render() {
-    const { state: { country, countryList } } = this.props;
+    const { state: { data, country, countryList } } = this.props;
+    console.log(countryList);
+
     const listCountry = countryList.map((country, key) =>
       <li className="country_list_item" key={key}>
-        {country}
+        <span
+          onClick={() => this.changeItemCountry(country, key)}>
+          {country}
+        </span>
         <button
           className="delete_btn"
           onClick={() => this.deleteCountry(key)}>

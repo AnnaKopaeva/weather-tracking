@@ -13,6 +13,7 @@ import './reset.css'
 
 const loggerMiddleware = createLogger()
 
+//initialization store
 const store = createStore(
   addData,
   applyMiddleware(

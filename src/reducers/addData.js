@@ -2,6 +2,8 @@ import * as types from '../actions/actionTypes'
 
 const initialState = {
   country: '',
+  lat: '',
+  lon: '',
   data: [],
   dataWeather: [],
   dataForecast: [],
@@ -37,6 +39,8 @@ export default function addData(state=initialState, action) {
         ...state,
         countryList: [
           state.country,
+          state.lat,
+          state.lon,
           ...state.countryList]
       };
     case types.DELETE_COUNTRY_LIST:

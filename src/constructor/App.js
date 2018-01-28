@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 //actions
 import * as addActions from '../actions/addActions';
 
-//constructors
+//constructor
 import EntryCountry from './entryCountry'
 import ForecastCity from './forecast'
 
@@ -23,6 +23,7 @@ class App extends Component {
   }
 }
 
+//join the store
 export default connect(
   state => ({
     state: state

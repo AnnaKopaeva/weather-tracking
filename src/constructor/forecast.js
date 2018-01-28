@@ -10,12 +10,14 @@ import NearestForecastCity from './nearestForecast'
 //style
 import '../css/forecast.css';
 
+//the constructor displays data depending on the selected city
 class ForecastCity extends Component {
 
   render() {
     const { state: {dataWeather: {current_observation}} } = this.props;
 
     if (current_observation){
+      var fullName = current_observation.display_location.full;
       var temperature = current_observation.temp_c;
       var localTime = current_observation.local_time_rfc822;
       var feelsLike = current_observation.feelslike_c;
@@ -25,6 +27,7 @@ class ForecastCity extends Component {
 
     return (
       <div className="wrapper_forecast">
+        <p className="forecast_time">{fullName}</p>
         <p className="forecast_time">{localTime}</p>
         {current_observation &&
           <div>

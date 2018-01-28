@@ -7,10 +7,12 @@ export function changeCountry(country) {
   }
 }
 
-export function addCountryList(countryList) {
+export function addCountryList(countryList, lat, lon) {
   return {
     type: types.ADD_COUNTRY_LIST,
-    countryList
+    countryList,
+    lat,
+    lon
   }
 }
 
@@ -66,7 +68,7 @@ export function fetchWeatherData(lat, lon) {
 export function setForecastData(json) {
   return {
     type: types.SET_FORECAST_DATA,
-    dataForecast: json
+    dataForecast: json,
   }
 }
 
@@ -83,3 +85,18 @@ export function fetchForecastData(lat, lon) {
   }
 }
 
+export function geoLookup() {
+  return dispatch => {
+    // returns an array of data with the help of geo-search
+    return fetch(`http://api.wunderground.com/api/35fbf1d86323921c/geolookup/q/autoip.json`)
+      .then(res => res.json())
+      .then(json =>
+        [
+          fetchWeatherData(json.location.lat, json.location.lon),
+          fetchForecastData(json.location.lat, json.location.lon),
+          changeCountry(json.location.city + ', ' + json.location.country_name)
+        ].forEach(dispatch)
+      )
+
+  }
+}

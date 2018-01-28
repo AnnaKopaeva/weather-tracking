@@ -10,6 +10,7 @@ import '../css/autocomplete.css';
 
 class AutocompleteList extends Component {
 
+
   clickListItem = (country, key) => {
     const { state: {data}, actions : {changeCountry, fetchWeatherData, fetchForecastData} } = this.props;
 
@@ -18,9 +19,13 @@ class AutocompleteList extends Component {
     let result = data[key];
 
     if (result) {
-      fetchWeatherData(result.lat, result.lon)
-      fetchForecastData(result.lat, result.lon)
+      // localStorage["result"] =
+      // localStorage["Ключ"] // Получение значения
+      // console.log(localValue);
+      fetchWeatherData(result.lat, result.lon);
+      fetchForecastData(result.lat, result.lon);
     }
+
   }
 
   render() {
