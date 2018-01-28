@@ -8,6 +8,9 @@ import { createStore, applyMiddleware } from 'redux'
 import App from './constructor/App'
 import addData from './reducers/addData'
 
+//style
+import './reset.css'
+
 const loggerMiddleware = createLogger()
 
 const store = createStore(
