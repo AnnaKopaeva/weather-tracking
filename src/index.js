@@ -13,14 +13,21 @@ import './reset.css'
 
 const loggerMiddleware = createLogger()
 
+const persistedState = localStorage.getItem('reduxState') ? JSON.parse(localStorage.getItem('reduxState')) : {}
+
 //initialization store
 const store = createStore(
   addData,
+  persistedState,
   applyMiddleware(
     thunkMiddleware,
     loggerMiddleware
   )
 );
+
+store.subscribe(()=>{
+  localStorage.setItem('reduxState', JSON.stringify(store.getState()))
+})
 
 render(
   <Provider store={store}>

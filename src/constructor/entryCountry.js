@@ -17,6 +17,7 @@ class EntryCountry extends Component {
 
   componentWillMount(){
     const {actions : { geoLookup }} = this.props;
+    //called function that asks for the user's current location
     geoLookup()
   }
 
@@ -29,52 +30,50 @@ class EntryCountry extends Component {
   };
 
 
-  changeItemCountry = (country, key) => {
-    const { state: {data}, actions : {changeCountry, getAutocompleteData, fetchWeatherData, fetchForecastData} } = this.props;
+  changeItemCountry = (country, lat, lon,) => {
+    const { actions : {changeCountry, fetchWeatherData, fetchForecastData} } = this.props;
 
-    changeCountry(country);
+    //when user click on a saved city,
+    // data is loaded that displays the weather forecast in the selected city
+    changeCountry(country, lat, lon);
+    fetchWeatherData(lat, lon);
+    fetchForecastData(lat, lon);
 
-    let result = data[key];
-    if (result) {
-
-      // localStorage["result"] = "this.props";
-      // localStorage["result"];
-      console.log(key)
-
-      fetchWeatherData(result.lat, result.lon);
-      fetchForecastData(result.lat, result.lon);
-    }
   }
 
   addCountry = () => {
     const { state: { countryList }, actions: {addCountryList}} = this.props;
 
+    //loaded in the store a list with the data of the added city
     addCountryList(countryList)
   };
 
   deleteCountry = (key) => {
     const { state: { countryList }, actions: {deleteCountryList}} = this.props;
 
+    //deleted in the store a list with the data of the added city
     deleteCountryList(countryList, key)
   }
 
 
   render() {
-    const { state: { data, country, countryList } } = this.props;
-    console.log(countryList);
+    const { state: { country, countryList } } = this.props;
 
-    const listCountry = countryList.map((country, key) =>
-      <li className="country_list_item" key={key}>
-        <span
-          onClick={() => this.changeItemCountry(country, key)}>
-          {country}
-        </span>
+    let listCountry = countryList.map((value, key) =>
+      // list of added cities, with the possibility of deleting them at the click of a button
+      <div className="country_list_item" key={key}>
+      <span
+        onClick={() => this.changeItemCountry(value.country, value.lat, value.lon, key)}>
+        {value.country}
+      </span>
+      {value.country &&
         <button
           className="delete_btn"
           onClick={() => this.deleteCountry(key)}>
           &#215;
         </button>
-      </li>
+      }
+      </div>
     )
 
     return (
@@ -91,10 +90,10 @@ class EntryCountry extends Component {
         <button
           className="add_btn"
           disabled={!country}
-          onClick={this.addCountry}>
+          onClick={() => this.addCountry()}>
           Додати
         </button>
-        <ul>{listCountry}</ul>
+        <div>{listCountry}</div>
         <AutocompleteList />
       </div>
     );

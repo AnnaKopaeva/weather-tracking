@@ -13,11 +13,17 @@
   outline: none
   box-sizing: border-box
   text-indent: 15px
+  &&::placeholder
+    font-style: italic
 
 .country_list_item
   display: inline-block
   padding-top: 10px
   padding-left: 10px
+  cursor: pointer
+  transition: color 0.5s ease-out
+  &:hover
+    color: $blue
 
 .add_btn
   height: 30px

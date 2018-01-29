@@ -16,6 +16,7 @@ class ForecastCity extends Component {
   render() {
     const { state: {dataWeather: {current_observation}} } = this.props;
 
+    //if the data loaded then they are recorded in the constant
     if (current_observation){
       var fullName = current_observation.display_location.full;
       var temperature = current_observation.temp_c;
@@ -27,7 +28,7 @@ class ForecastCity extends Component {
 
     return (
       <div className="wrapper_forecast">
-        <p className="forecast_time">{fullName}</p>
+        <p className="forecast_city">{fullName}</p>
         <p className="forecast_time">{localTime}</p>
         {current_observation &&
           <div>

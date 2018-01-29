@@ -7,15 +7,21 @@ const initialState = {
   data: [],
   dataWeather: [],
   dataForecast: [],
-  countryList: []
+  countryList: [{
+    "country": '',
+    "lat": '',
+    "lon": ''
+  }]
 };
 
-export default function addData(state=initialState, action) {
+export default function addData( state= JSON.parse(localStorage.state) && initialState, action) {
   switch (action.type) {
     case types.CHANGE_COUNTRY:
       return {
         ...state,
         country: action.country,
+        lat: action.lat,
+        lon: action.lon,
         // cleared array with data, for the possibility of introducing a new city
         data: [],
       };
@@ -38,14 +44,17 @@ export default function addData(state=initialState, action) {
       return {
         ...state,
         countryList: [
-          state.country,
-          state.lat,
-          state.lon,
+          {
+            country: state.country,
+            lat: state.lat,
+            lon: state.lon
+          },
           ...state.countryList]
       };
     case types.DELETE_COUNTRY_LIST:
       return {
         ...state,
+        //removes an element from the array with the selected key
         countryList : state.countryList.filter( (item, key) => key !== action.key)
       };
     default:

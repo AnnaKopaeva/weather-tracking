@@ -11,6 +11,7 @@ class NearestForecastCity extends Component {
   render() {
     const { state: { dataForecast} } = this.props;
 
+    //if the data loaded then we added component with this data
     if (dataForecast.txt_forecast) {
       let forecastday = dataForecast.txt_forecast.forecastday;
 

@@ -15,7 +15,11 @@
 .country_list_item {
   display: inline-block;
   padding-top: 10px;
-  padding-left: 10px; }
+  padding-left: 10px;
+  cursor: pointer;
+  transition: color 0.5s ease-out; }
+  .country_list_item:hover {
+    color: #57b7df; }
 
 .add_btn {
   height: 30px;
