@@ -1,5 +1,7 @@
 Weather tracking
 
+![gif](./public/giphy.gif)
+
 ```
     $ git clone https://github.com/AnnaKopaeva/weather-tracking.git
     $ cd weather-tracking
