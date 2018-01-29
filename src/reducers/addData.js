@@ -14,7 +14,12 @@ const initialState = {
   }]
 };
 
-export default function addData( state= JSON.parse(localStorage.state) && initialState, action) {
+// checking for first loading if localStorage has data
+// else use default
+let state1 = localStorage.reduxState ?
+  JSON.parse(localStorage.reduxState): initialState;
+
+export default function addData( state = state1, action) {
   switch (action.type) {
     case types.CHANGE_COUNTRY:
       return {

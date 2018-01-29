@@ -16,9 +16,9 @@ import '../css/App.css';
 class EntryCountry extends Component {
 
   componentWillMount(){
-    const {actions : { geoLookup }} = this.props;
-    //called function that asks for the user's current location
-    geoLookup()
+    const {actions : { geoLookup }} = this.props
+      //called function that asks for the user's current location
+      geoLookup()
   }
 
   changeInput = (e) => {
@@ -30,7 +30,7 @@ class EntryCountry extends Component {
   };
 
 
-  changeItemCountry = (country, lat, lon,) => {
+  changeItemCountry = (country, lat, lon) => {
     const { actions : {changeCountry, fetchWeatherData, fetchForecastData} } = this.props;
 
     //when user click on a saved city,
@@ -58,7 +58,6 @@ class EntryCountry extends Component {
 
   render() {
     const { state: { country, countryList } } = this.props;
-
     let listCountry = countryList.map((value, key) =>
       // list of added cities, with the possibility of deleting them at the click of a button
       <div className="country_list_item" key={key}>
@@ -66,13 +65,13 @@ class EntryCountry extends Component {
         onClick={() => this.changeItemCountry(value.country, value.lat, value.lon, key)}>
         {value.country}
       </span>
-      {value.country &&
+        {value.country &&
         <button
           className="delete_btn"
           onClick={() => this.deleteCountry(key)}>
           &#215;
         </button>
-      }
+        }
       </div>
     )
 
