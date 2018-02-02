@@ -10,12 +10,11 @@ export function changeCountry(country, lat, lon) {
   }
 }
 
-export function addCountryList(lat, lon) {
+export function addCountryList(countryList) {
 //an item added to the list, which shows the selected cities
   return {
     type: types.ADD_COUNTRY_LIST,
-    lat,
-    lon
+    countryList
   }
 }
 
@@ -72,7 +71,7 @@ export function fetchWeatherData(lat, lon) {
 }
 
 export function setForecastData(json) {
-  //returns an array of data that is responsible for the forecast for for the following days
+  //returns an array of data that is responsible for the forecast for the following days
   return {
     type: types.SET_FORECAST_DATA,
     dataForecast: json,
@@ -92,6 +91,13 @@ export function fetchForecastData(lat, lon) {
   }
 }
 
+export function accessGeoLookup(access) {
+  return {
+    type: types.ACCESS_GEO_LOOKUP,
+    access,
+  }
+}
+
 export function geoLookup() {
   return dispatch => {
     // returns an array of data with the help of geo-search
@@ -100,6 +106,7 @@ export function geoLookup() {
       .then(json =>
         [
           //called actions to update the data that contains the components
+          accessGeoLookup(window.confirm("Разрешить получить сведения о Вашем местоположении?")),
           fetchWeatherData(json.location.lat, json.location.lon),
           fetchForecastData(json.location.lat, json.location.lon),
           changeCountry(json.location.city + ', ' + json.location.country_name, json.location.lat, json.location.lon)

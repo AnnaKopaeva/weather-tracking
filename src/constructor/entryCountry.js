@@ -15,10 +15,13 @@ import '../css/App.css';
 //we get the initial value automatically according to the coordinates of the user
 class EntryCountry extends Component {
 
-  componentWillMount(){
-    const {actions : { geoLookup }} = this.props
-      //called function that asks for the user's current location
+  componentDidMount(){
+    const {state: { countryList, access }, actions : { geoLookup }} = this.props;
+    //called function that asks for the user's current location
+
+    if (access || countryList.country === '' ) {
       geoLookup()
+    }
   }
 
   changeInput = (e) => {
@@ -41,11 +44,19 @@ class EntryCountry extends Component {
 
   }
 
-  addCountry = () => {
+  addCountry = (value) => {
     const { state: { countryList }, actions: {addCountryList}} = this.props;
 
     //loaded in the store a list with the data of the added city
-    addCountryList(countryList)
+    for (let key in countryList) {
+      if (countryList.hasOwnProperty(key)) {
+        let country = countryList[key].country;
+        if ( country === value ) {
+          return false
+        }
+      }
+    }
+    addCountryList(countryList);
   };
 
   deleteCountry = (key) => {
@@ -89,7 +100,7 @@ class EntryCountry extends Component {
         <button
           className="add_btn"
           disabled={!country}
-          onClick={() => this.addCountry()}>
+          onClick={() => this.addCountry(country)}>
           Додати
         </button>
         <div>{listCountry}</div>

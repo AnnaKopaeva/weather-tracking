@@ -7,6 +7,7 @@ const initialState = {
   data: [],
   dataWeather: [],
   dataForecast: [],
+  access: true,
   countryList: [{
     "country": '',
     "lat": '',
@@ -61,6 +62,11 @@ export default function addData( state = state1, action) {
         ...state,
         //removes an element from the array with the selected key
         countryList : state.countryList.filter( (item, key) => key !== action.key)
+      };
+    case types.ACCESS_GEO_LOOKUP:
+      return {
+        ...state,
+        access: false
       };
     default:
       return state
