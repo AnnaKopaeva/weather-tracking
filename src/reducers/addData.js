@@ -7,7 +7,7 @@ const initialState = {
   data: [],
   dataWeather: [],
   dataForecast: [],
-  access: true,
+  access: false,
   countryList: [{
     "country": '',
     "lat": '',
@@ -66,7 +66,7 @@ export default function addData( state = state1, action) {
     case types.ACCESS_GEO_LOOKUP:
       return {
         ...state,
-        access: false
+        access: action.access
       };
     default:
       return state

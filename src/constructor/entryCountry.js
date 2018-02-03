@@ -16,10 +16,18 @@ import '../css/App.css';
 class EntryCountry extends Component {
 
   componentDidMount(){
-    const {state: { countryList, access }, actions : { geoLookup }} = this.props;
-    //called function that asks for the user's current location
+    const {state: { access }, actions : { geoLookup, accessGeoLookup }} = this.props;
+    let accessAnswer = false;
 
-    if (access || countryList.country === '' ) {
+    //if the user has not confirmed his location
+    if ( !access ) {
+      accessAnswer = window.confirm("Разрешить получить сведения о Вашем местоположении?");
+      accessGeoLookup(accessAnswer);
+    }
+
+    //if the user has confirmed his location
+    if (accessAnswer) {
+      //called function that asks for the user's current location
       geoLookup()
     }
   }
@@ -69,6 +77,7 @@ class EntryCountry extends Component {
 
   render() {
     const { state: { country, countryList } } = this.props;
+
     let listCountry = countryList.map((value, key) =>
       // list of added cities, with the possibility of deleting them at the click of a button
       <div className="country_list_item" key={key}>

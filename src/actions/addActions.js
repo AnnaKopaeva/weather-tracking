@@ -106,7 +106,6 @@ export function geoLookup() {
       .then(json =>
         [
           //called actions to update the data that contains the components
-          accessGeoLookup(window.confirm("Разрешить получить сведения о Вашем местоположении?")),
           fetchWeatherData(json.location.lat, json.location.lon),
           fetchForecastData(json.location.lat, json.location.lon),
           changeCountry(json.location.city + ', ' + json.location.country_name, json.location.lat, json.location.lon)
